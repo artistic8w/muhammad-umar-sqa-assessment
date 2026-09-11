@@ -1,23 +1,40 @@
 {
   "name": "muhammad-umar-sqa-assessment",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright SQA Assessment for Restful-Booker Platform",
   "main": "index.js",
-  "scripts": {},
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test --grep @regression",
+    "test:api": "npx playwright test tests/api/",
+    "test:ui": "npx playwright test tests/ui/",
+    "test:ui:headed": "npx playwright test tests/ui/ --headed",
+    "test:ui:debug": "npx playwright test --ui",
+    "report": "npx playwright show-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/artistic8w/muhammad-umar-sqa-assessment.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "sqa",
+    "automation",
+    "restful-booker"
+  ],
+  "author": "Muhammad Umar",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/artistic8w/muhammad-umar-sqa-assessment/issues"
   },
   "homepage": "https://github.com/artistic8w/muhammad-umar-sqa-assessment#readme",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^22.20.2"
+    "@types/node": "^22.20.2",
+    "dotenv": "^17.4.2",
+    "typescript": "^7.0.2"
   }
 }
