@@ -7,6 +7,8 @@ export class AdminLoginPage extends BasePage {
   readonly loginButton: Locator;
   readonly logoutButton: Locator;
   readonly errorMessage: Locator;
+  // Navbar brand link — used as the post-login success indicator since it's
+  // present on the dashboard but not on the login screen's initial state.
   readonly dashboardHeading: Locator;
 
   constructor(page: Page) {
@@ -28,7 +30,9 @@ export class AdminLoginPage extends BasePage {
   }
 
   /**
-   * Reads credentials directly from environment variables without exposing fallback values.
+   * Logs in using admin credentials from environment variables by default.
+   * Throws early with a clear message if credentials are missing, rather
+   * than letting Playwright fail later with an unhelpful "fill() on empty string" error.
    */
   async login(
     username = process.env.UI_ADMIN_USERNAME,

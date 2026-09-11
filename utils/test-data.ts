@@ -2,6 +2,7 @@ import { BookingPayload } from './api-client.js';
 import { ContactFormPayload } from '../pages/ContactPage.js';
 import { RoomDetails } from '../pages/AdminDashboardPage.js';
 
+/** Valid booking payload used for happy-path booking creation tests. */
 export const getValidBookingData = (): BookingPayload => ({
   firstname: 'Muhammad',
   lastname: 'Umar',
@@ -14,6 +15,7 @@ export const getValidBookingData = (): BookingPayload => ({
   additionalneeds: 'Late Check-in',
 });
 
+/** Payload used to verify PUT /booking correctly overwrites an existing booking. */
 export const getUpdatedBookingData = (): BookingPayload => ({
   firstname: 'Muhammad',
   lastname: 'Umar Updated',
@@ -27,6 +29,8 @@ export const getUpdatedBookingData = (): BookingPayload => ({
 });
 
 // --- UI Test Data ---
+
+/** Valid contact form payload used for the happy-path contact form test. */
 export const getValidContactFormData = (): ContactFormPayload => ({
   name: 'Muhammad Umar',
   email: 'umar.qa@example.com',
@@ -35,6 +39,11 @@ export const getValidContactFormData = (): ContactFormPayload => ({
   message: 'Hello, I would like to inquire about room availability and pricing details.',
 });
 
+/**
+ * Generates room data with a randomized room name/number on every call.
+ * Randomization avoids "duplicate room number" collisions across repeated
+ * test runs (see BUG-004), since the Admin Portal does not enforce uniqueness.
+ */
 export const getRandomRoomDetails = (): RoomDetails => ({
   roomName: `${Math.floor(100 + Math.random() * 900)}`,
   type: 'Single',

@@ -1,6 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage.js';
 
+/** Shape of a room creation payload; feature flags are optional so tests can create minimal rooms. */
 export interface RoomDetails {
   roomName: string;
   type: 'Single' | 'Double' | 'Twin' | 'Family' | 'Suite';
@@ -62,6 +63,7 @@ export class AdminDashboardPage extends BasePage {
     await this.createRoomButton.click();
   }
 
+  /** Locates the newly created room's row in the dashboard grid by its exact room name/number. */
   getRoomLocator(roomName: string): Locator {
     return this.page.getByText(roomName, { exact: true });
   }

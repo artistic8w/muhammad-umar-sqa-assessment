@@ -39,6 +39,7 @@ export class ContactPage extends BasePage {
     await this.navigateTo(url);
   }
 
+  /** Fills only the fields present in `data`, leaving others untouched — supports negative/partial-fill tests. */
   async fillContactForm(data: Partial<ContactFormPayload>) {
     if (data.name !== undefined) await this.nameInput.fill(data.name);
     if (data.email !== undefined) await this.emailInput.fill(data.email);
@@ -51,6 +52,12 @@ export class ContactPage extends BasePage {
     await this.submitButton.click();
   }
 
+  /**
+   * Success heading includes the submitted name dynamically
+   * (e.g. "Thanks for getting in touch Muhammad Umar!"), so this is a
+   * factory method rather than a fixed locator — callers pass the exact
+   * name they submitted to get an exact-match locator back.
+   */
   successHeading(name: string): Locator {
     return this.page.getByRole('heading', {
       name: `Thanks for getting in touch ${name}!`,

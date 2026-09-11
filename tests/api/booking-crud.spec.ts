@@ -71,7 +71,9 @@ test.describe('Sections 2.2–2.5 — Booking CRUD Operations', () => {
     const body = await response.json();
     expect(body.lastname).toBe(updatedPayload.lastname);
   });
-
+  
+  // Contrast case: unlike the documented 500-error bug above, this IS the
+  // API's correct, expected behavior — missing auth correctly returns 403.
   test('2.4.2 PUT /booking/:id without auth token returns 403 Forbidden @regression', async () => {
     const createRes = await apiClient.createBooking(getValidBookingData());
     const { bookingid } = await createRes.json();

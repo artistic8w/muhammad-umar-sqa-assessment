@@ -15,13 +15,9 @@ test.describe('Section 3.1 & 3.2 — Contact Form Tests', () => {
     await contactPage.fillContactForm(contactData);
     await contactPage.submitForm();
 
-    // Verify success confirmation message appears
+    // successHeading builds an exact-match locator using the submitted name,
+    // so visibility alone confirms both the confirmation state AND correct interpolation
     await expect(contactPage.successHeading(contactData.name)).toBeVisible({ timeout: 10000 });
-    // Verify success confirmation message appears with the correct name interpolated
-//     await expect(contactPage.successHeading).toHaveText(
-//     `Thanks for getting in touch ${contactData.name}!`
-//   );
-
   });
 
   test('3.2 Contact Form — Validation Errors @regression', async () => {
