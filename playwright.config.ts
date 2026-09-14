@@ -2,8 +2,11 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Read environment variables from .env file (ES Module safe)
-dotenv.config({ path: path.resolve(import.meta.dirname, '.env') });
+// Read environment variables from .env file (ES Module safe).
+// `quiet: true` suppresses dotenv's random promotional "tip" lines
+// (e.g. "injected env... [www.dotenvx.com]") that otherwise print on
+// every test run — cosmetic noise, not needed for a demo or CI log.
+dotenv.config({ path: path.resolve(import.meta.dirname, '.env'), quiet: true });
 
 export default defineConfig({
   testDir: './tests',

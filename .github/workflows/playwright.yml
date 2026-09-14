@@ -8,17 +8,36 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      UI_BASE_URL: ${{ secrets.UI_BASE_URL }}
+      UI_ADMIN_USERNAME: ${{ secrets.UI_ADMIN_USERNAME }}
+      UI_ADMIN_PASSWORD: ${{ secrets.UI_ADMIN_PASSWORD }}
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      API_ADMIN_USERNAME: ${{ secrets.API_ADMIN_USERNAME }}
+      API_ADMIN_PASSWORD: ${{ secrets.API_ADMIN_PASSWORD }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        cache: 'npm'
     - name: Install dependencies
       run: npm ci
+    - name: Type check
+      run: npm run typecheck
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
+      # Only chromium is installed — matches the single 'chromium' project
+      # configured in playwright.config.ts. Firefox/WebKit aren't used, so
+      # installing them wastes CI time.
+      run: npx playwright install chromium --with-deps
+    - name: Run smoke suite (gate)
+      # Fails fast on the must-pass paths before spending time on the full
+      # regression suite. A failed smoke run stops the workflow here by
+      # default, since GitHub Actions steps are sequential and non-continuing
+      # unless explicitly marked continue-on-error.
+      run: npm run test:smoke
+    - name: Run regression suite
+      run: npm run test:regression
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

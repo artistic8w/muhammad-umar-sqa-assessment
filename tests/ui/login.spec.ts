@@ -9,11 +9,11 @@ test.describe('Section 3.3 — Admin Portal Login', () => {
     await loginPage.navigate();
   });
 
-  test('3.3 Admin Login with valid credentials @smoke', async () => {
+  test('3.3 Admin Login with valid credentials', { tag: '@smoke' }, async () => {
     await loginPage.login();
 
-    // Assert successful authentication by checking Logout button visibility
-    //await expect(loginPage.logoutButton).toBeVisible({ timeout: 10000 });
+    // Assert successful authentication by checking navbar brand link
+    // visibility (present on the dashboard, absent on the pre-login screen)
     await expect(loginPage.dashboardHeading).toBeVisible({ timeout: 10000 });
   });
 });

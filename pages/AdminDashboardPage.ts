@@ -65,6 +65,8 @@ export class AdminDashboardPage extends BasePage {
 
   /** Locates the newly created room's row in the dashboard grid by its exact room name/number. */
   getRoomLocator(roomName: string): Locator {
-    return this.page.getByText(roomName, { exact: true });
+     return this.page
+      .locator('[data-testid="roomlisting"]')
+      .filter({ has: this.page.locator(`p[id="roomName${roomName}"]`) });
   }
 }

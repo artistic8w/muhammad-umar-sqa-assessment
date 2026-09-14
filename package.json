@@ -12,6 +12,7 @@
     "test:ui": "npx playwright test tests/ui/",
     "test:ui:headed": "npx playwright test tests/ui/ --headed",
     "test:ui:debug": "npx playwright test --ui",
+    "typecheck": "tsc --noEmit",
     "report": "npx playwright show-report"
   },
   "repository": {

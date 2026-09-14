@@ -10,7 +10,7 @@ test.describe('Section 3.1 & 3.2 — Contact Form Tests', () => {
     await contactPage.navigate();
   });
 
-  test('3.1 Contact Form — Happy Path @smoke', async () => {
+  test('3.1 Contact Form — Happy Path', { tag: '@smoke' }, async () => {
     const contactData = getValidContactFormData();
     await contactPage.fillContactForm(contactData);
     await contactPage.submitForm();
@@ -20,7 +20,7 @@ test.describe('Section 3.1 & 3.2 — Contact Form Tests', () => {
     await expect(contactPage.successHeading(contactData.name)).toBeVisible({ timeout: 10000 });
   });
 
-  test('3.2 Contact Form — Validation Errors @regression', async () => {
+  test('3.2 Contact Form — Validation Errors', { tag: '@regression' }, async () => {
     // Leave mandatory fields blank and submit
     await contactPage.submitForm();
 

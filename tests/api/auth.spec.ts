@@ -8,8 +8,8 @@ test.describe('Section 2.1 — Auth Token Scenarios', () => {
     apiClient = new ApiClient(request);
   });
 
-  test('POST /auth with valid credentials returns a token @smoke', async () => {
-    const response = await apiClient.createToken('admin', 'password123');
+  test('POST /auth with valid credentials returns a token', { tag: '@smoke' }, async () => {
+    const response = await apiClient.createToken();
     
     expect(response.status()).toBe(200);
     const body = await response.json();
@@ -19,7 +19,7 @@ test.describe('Section 2.1 — Auth Token Scenarios', () => {
     expect(body.token.length).toBeGreaterThan(0);
   });
 
-  test('POST /auth with invalid credentials returns HTTP 200 with error payload @regression', async () => {
+  test('POST /auth with invalid credentials returns HTTP 200 with error payload', { tag: '@regression' }, async () => {
     const response = await apiClient.createToken('invalidUser', 'wrongPassword');
     
     // NOTE & ASSERTION CHOICE: The Restful-Booker API design returns HTTP 200 OK 
