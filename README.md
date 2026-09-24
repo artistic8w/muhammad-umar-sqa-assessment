@@ -100,6 +100,21 @@ Tests are tagged `@smoke` and `@regression` to support targeted execution in CI 
 
 ---
 
+## 🔭 Datadog Synthetics
+
+As an additional monitoring and testing approach, I configured **Datadog Synthetics** tests against the same application to demonstrate continuous validation of critical user journeys.
+
+🎥 **[Watch the Datadog Synthetics Demo](https://drive.google.com/file/d/17Vf8TeS_vCyjAVJkWxhKEbrGAj4MKQ_k/view?usp=sharing)**
+
+The demo covers:
+- Synthetic browser test creation
+- Continuous execution of critical user journeys
+- Assertions and validation
+- Monitoring test results in Datadog
+- Using Synthetics as a complementary layer alongside functional automation
+
+--- 
+
 ## Continuous Integration
 
 Every push and pull request to `main`/`master` triggers the [Playwright Tests workflow](./.github/workflows/playwright.yml), which installs dependencies, installs browsers, runs the full suite, and uploads the HTML report as a build artifact (retained for 30 days).
